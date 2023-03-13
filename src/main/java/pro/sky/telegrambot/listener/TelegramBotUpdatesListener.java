@@ -78,5 +78,11 @@ TelegramBotUpdatesListener implements UpdatesListener {
         return allNotification;
     }
 
+    public void sendingNotifications(List<NotificationTask> notificationTasks){
+        notificationTasks.forEach(task -> {
+            SendMessage sendMessage = new SendMessage(task.getId(), task.getMessage());
+            telegramBot.execute(sendMessage);
+        });
+    }
 
 }
