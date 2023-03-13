@@ -68,5 +68,15 @@ TelegramBotUpdatesListener implements UpdatesListener {
         return UpdatesListener.CONFIRMED_UPDATES_ALL;
     }
 
+    public List<NotificationTask> collectingNotifications(LocalDateTime time){
+        List<NotificationTask> allNotification = notificationTaskRepository.findAll();
+        notificationTaskRepository.findAll().forEach(times -> {
+            if(time.equals(times)){
+                allNotification.add(times);
+            }
+        });
+        return allNotification;
+    }
+
 
 }
