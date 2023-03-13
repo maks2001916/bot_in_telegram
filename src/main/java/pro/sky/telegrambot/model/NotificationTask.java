@@ -53,20 +53,19 @@ public class NotificationTask {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        NotificationTask notificationTask = (NotificationTask) o;
-        return id == notificationTask.id && Objects.equals(message, notificationTask.message) && Objects.equals(dateAndTime, notificationTask.dateAndTime);
+        NotificationTask that = (NotificationTask) o;
+        return id == that.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, message, dateAndTime);
+        return Objects.hash(id);
     }
 
     @Override
     public String toString() {
-        return "Reminder{" +
-                "message='" + message + '\'' +
-                ", dateAndTime='" + dateAndTime + '\'' +
+        return "NotificationTask{" +
+                "id=" + id +
                 '}';
     }
 }
