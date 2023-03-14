@@ -1,6 +1,6 @@
-- liquibase formatted sql
+-- liquibase formatted sql
 
-    -changeset mmaxim:1
+    --changeset mmaxim:create_table_reminders
     CREATE TABLE reminders(
         id SERIAL PRIMARY KEY,
         message TEXT,
