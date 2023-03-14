@@ -5,7 +5,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import pro.sky.telegrambot.listener.TelegramBotUpdatesListener;
 import pro.sky.telegrambot.model.NotificationTask;
-import pro.sky.telegrambot.repositiries.NotificationTaskRepository;
+import pro.sky.telegrambot.repositiries.Repository;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -15,7 +15,7 @@ import java.util.List;
 @EnableScheduling
 public class NotificationSchedulerService {
 
-    NotificationTaskRepository notificationTaskRepository;
+    Repository Repository;
 
     TelegramBotUpdatesListener telegramBotUpdatesListener = new TelegramBotUpdatesListener();
 
@@ -34,7 +34,7 @@ public class NotificationSchedulerService {
 
     public List<NotificationTask> collectingNotifications(LocalDateTime time){
         List<NotificationTask> allNotification = new ArrayList<>();
-        notificationTaskRepository.findAll().forEach(times -> {
+        Repository.findAll().forEach(times -> {
             if(time.equals(times)){
                 allNotification.add(times);
             }

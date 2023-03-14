@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pro.sky.telegrambot.model.NotificationTask;
-import pro.sky.telegrambot.repositiries.NotificationTaskRepository;
+import pro.sky.telegrambot.repositiries.Repository;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
@@ -26,7 +26,7 @@ TelegramBotUpdatesListener implements UpdatesListener {
 
     private Logger logger = LoggerFactory.getLogger(TelegramBotUpdatesListener.class);
 
-    private NotificationTaskRepository notificationTaskRepository;
+    private Repository Repository;
     private long id = 1;
     @Autowired
     private TelegramBot telegramBot;
@@ -67,7 +67,7 @@ TelegramBotUpdatesListener implements UpdatesListener {
                 LocalDateTime dates = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
                 String texts = matcherText.group(2);
                 NotificationTask notificationTask = new NotificationTask(id, update.message().messageId(), texts, dates);
-                notificationTaskRepository.save(notificationTask);
+                Repository.save(notificationTask);
             }
 
         });
