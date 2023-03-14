@@ -1,5 +1,6 @@
 package pro.sky.telegrambot.service;
 
+import com.pengrad.telegrambot.request.SendMessage;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import pro.sky.telegrambot.listener.TelegramBotUpdatesListener;
@@ -22,13 +23,13 @@ public class NotificationSchedulerService {
     @Scheduled(cron = "0 0/1 * * * *")
     public void sendingNotifications(){
         List<NotificationTask> notificationTasks = collectingNotifications(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES));
-        telegramBotUpdatesListener.sendingNotifications(notificationTasks);
+        sendingNotifications(notificationTasks);
     }
 
     @Scheduled(fixedDelay = 1L)
     public void sendingNotificationsCurrentTime(){
         List<NotificationTask> notificationTasks = collectingNotifications(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES));
-        telegramBotUpdatesListener.sendingNotifications(notificationTasks);
+        sendingNotifications(notificationTasks);
     }
 
     public List<NotificationTask> collectingNotifications(LocalDateTime time){
@@ -39,5 +40,12 @@ public class NotificationSchedulerService {
             }
         });
         return allNotification;
+    }
+
+    public void sendingNotifications(List<NotificationTask> notificationTasks){
+        notificationTasks.forEach(task -> {
+            SendMessage sendMessage = new SendMessage(task.getId(), task.getMessage());
+            telegramBotUpdatesListener.setTelegramBot(sendMessage);
+        });
     }
 }

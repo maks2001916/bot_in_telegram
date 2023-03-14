@@ -36,6 +36,10 @@ TelegramBotUpdatesListener implements UpdatesListener {
         telegramBot.setUpdatesListener(this);
     }
 
+    public void setTelegramBot(SendMessage sendMessage){
+        telegramBot.execute(sendMessage);
+    }
+
     @Override
     public int process(List<Update> updates) {
 
@@ -69,13 +73,6 @@ TelegramBotUpdatesListener implements UpdatesListener {
         });
         id++;
         return UpdatesListener.CONFIRMED_UPDATES_ALL;
-    }
-
-    public void sendingNotifications(List<NotificationTask> notificationTasks){
-        notificationTasks.forEach(task -> {
-            SendMessage sendMessage = new SendMessage(task.getId(), task.getMessage());
-            telegramBot.execute(sendMessage);
-        });
     }
 
 }
