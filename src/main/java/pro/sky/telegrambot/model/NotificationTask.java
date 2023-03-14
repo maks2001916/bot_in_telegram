@@ -12,13 +12,19 @@ public class NotificationTask {
     @Id
     @GeneratedValue
     private long id;
+    private long chatId;
     private String message;
     private LocalDateTime dateAndTime;
 
-    public NotificationTask(long id, String message, LocalDateTime dateAndTime){
+    public NotificationTask(long id, long chatId, String message, LocalDateTime dateAndTime){
         this.id = id;
+        this.chatId = chatId;
         this.message = message;
         this.dateAndTime = dateAndTime;
+    }
+
+    public long getChatId() {
+        return chatId;
     }
 
     public NotificationTask() {
@@ -37,8 +43,12 @@ public class NotificationTask {
         return dateAndTime;
     }
 
-    public void SetId(Long id){
+    public void setId(long id) {
         this.id = id;
+    }
+
+    public void setChatId(long chatId) {
+        this.chatId = chatId;
     }
 
     public void setMessage(String message){
@@ -54,18 +64,19 @@ public class NotificationTask {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         NotificationTask that = (NotificationTask) o;
-        return id == that.id;
+        return id == that.id && chatId == that.chatId;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, chatId);
     }
 
     @Override
     public String toString() {
         return "NotificationTask{" +
                 "id=" + id +
+                "chatId=" + chatId +
                 '}';
     }
 }

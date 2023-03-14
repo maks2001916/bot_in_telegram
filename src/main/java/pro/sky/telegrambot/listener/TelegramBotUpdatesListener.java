@@ -26,6 +26,7 @@ TelegramBotUpdatesListener implements UpdatesListener {
     private Logger logger = LoggerFactory.getLogger(TelegramBotUpdatesListener.class);
 
     private NotificationTaskRepository notificationTaskRepository;
+    private long id = 1;
     @Autowired
     private TelegramBot telegramBot;
 
@@ -60,11 +61,12 @@ TelegramBotUpdatesListener implements UpdatesListener {
                 String date = matcher.group(1);
                 LocalDateTime dates = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
                 String texts = matcherText.group(2);
-                NotificationTask notificationTask = new NotificationTask(update.message().messageId(), texts, dates);
+                NotificationTask notificationTask = new NotificationTask(id, update.message().messageId(), texts, dates);
                 notificationTaskRepository.save(notificationTask);
             }
 
         });
+        id++;
         return UpdatesListener.CONFIRMED_UPDATES_ALL;
     }
 
