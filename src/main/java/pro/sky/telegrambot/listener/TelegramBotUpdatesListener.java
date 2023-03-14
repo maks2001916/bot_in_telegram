@@ -15,6 +15,7 @@ import pro.sky.telegrambot.repositiries.NotificationTaskRepository;
 import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -71,7 +72,7 @@ TelegramBotUpdatesListener implements UpdatesListener {
     }
 
     public List<NotificationTask> collectingNotifications(LocalDateTime time){
-        List<NotificationTask> allNotification = notificationTaskRepository.findAll();
+        List<NotificationTask> allNotification = new ArrayList<>();
         notificationTaskRepository.findAll().forEach(times -> {
             if(time.equals(times)){
                 allNotification.add(times);

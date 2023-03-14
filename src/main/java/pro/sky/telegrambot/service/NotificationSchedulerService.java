@@ -21,4 +21,9 @@ public class NotificationSchedulerService {
         telegramBotUpdatesListener.sendingNotifications(notificationTasks);
     }
 
+    @Scheduled(fixedDelay = 1L)
+    public void sendingNotificationsCurrentTime(){
+        List<NotificationTask> notificationTasks = telegramBotUpdatesListener.collectingNotifications(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES));
+        telegramBotUpdatesListener.sendingNotifications(notificationTasks);
+    }
 }
