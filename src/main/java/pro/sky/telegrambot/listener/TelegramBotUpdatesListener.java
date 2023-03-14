@@ -71,16 +71,6 @@ TelegramBotUpdatesListener implements UpdatesListener {
         return UpdatesListener.CONFIRMED_UPDATES_ALL;
     }
 
-    public List<NotificationTask> collectingNotifications(LocalDateTime time){
-        List<NotificationTask> allNotification = new ArrayList<>();
-        notificationTaskRepository.findAll().forEach(times -> {
-            if(time.equals(times)){
-                allNotification.add(times);
-            }
-        });
-        return allNotification;
-    }
-
     public void sendingNotifications(List<NotificationTask> notificationTasks){
         notificationTasks.forEach(task -> {
             SendMessage sendMessage = new SendMessage(task.getId(), task.getMessage());
