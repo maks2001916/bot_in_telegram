@@ -26,12 +26,6 @@ public class NotificationSchedulerService {
         sendingNotifications(notificationTasks);
     }
 
-    @Scheduled(fixedDelay = 1L)
-    public void sendingNotificationsCurrentTime(){
-        List<NotificationTask> notificationTasks = collectingNotifications(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES));
-        sendingNotifications(notificationTasks);
-    }
-
     public List<NotificationTask> collectingNotifications(LocalDateTime time){
         List<NotificationTask> allNotification = new ArrayList<>();
         repository.findAll().forEach(times -> {
