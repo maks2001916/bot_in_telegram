@@ -15,7 +15,7 @@ import java.util.List;
 @EnableScheduling
 public class NotificationSchedulerService {
 
-    NotificationTaskRepository Repository;
+    private NotificationTaskRepository repository;
 
     TelegramBotUpdatesListener telegramBotUpdatesListener = new TelegramBotUpdatesListener();
 
@@ -34,7 +34,7 @@ public class NotificationSchedulerService {
 
     public List<NotificationTask> collectingNotifications(LocalDateTime time){
         List<NotificationTask> allNotification = new ArrayList<>();
-        Repository.findAll().forEach(times -> {
+        repository.findAll().forEach(times -> {
             if(time.equals(times)){
                 allNotification.add(times);
             }
