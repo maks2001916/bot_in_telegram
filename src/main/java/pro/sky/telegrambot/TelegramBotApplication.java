@@ -17,14 +17,9 @@ import java.util.List;
 @EnableScheduling
 public class TelegramBotApplication {
 
-	NotificationSchedulerService notificationSchedulerService = new NotificationSchedulerService();
 	public static void main(String[] args) {
 		SpringApplication.run(TelegramBotApplication.class, args);
 
-	}
-
-	public void sendingNotifications(){
-		notificationSchedulerService.sendingNotifications();
 	}
 
 }
